@@ -3,7 +3,7 @@ Make vim as an IDE for C/C++, Python, Rust or other languages!
 You can use these features: autosync completer, debugger, colorscheme, file system explorer and so on!
 
 # Screenshot
-![alt text](https://raw.githubusercontent.com/mzd245/vimrc/master/image.png)
+![alt text](https://raw.githubusercontent.com/mzd245/vimrc/master/screenshot.png)
 
 # Installation
 First of all, you have to install [vim-plug](https://github.com/junegunn/vim-plug) to use plugins. After installation, just run `:PlugInstall` command. 
