@@ -6,13 +6,12 @@ You can use these features: autosync completer, debugger, colorscheme, file syst
 ![alt text](https://raw.githubusercontent.com/mzd245/vimrc/master/image.png)
 
 # Installation
-To install plugins use PlugInstall.[vim-plug](https://github.com/junegunn/vim-plug) will install all of the plugins.
-for debugger and coc configuration read the [vimspector](https://github.com/puremourning/vimspector#installation) and coc(You have to install language server such as [clangd](https://clang.llvm.org/extra/clangd/Installation.html) or [ccls](https://github.com/MaskRay/ccls)) manual for c/c++ or python (or something else!).
+First of all, you have to install [vim-plug](https://github.com/junegunn/vim-plug) to use plugins. After installation, just run `:PlugInstall` command. 
+## Languages 
+### C/C++
+Run `:CocConfig` command to create/open coc-settings.json file in ~/.vim.
 
-# clangd and ccls coc plugin configuration 
-first run `:CocConfig` in vim/nvim to create/open coc-settings.json file in ~/.vim.
- 
-Add this config **IF YOU ARE USING clangd** :
+Add this configuration to json file **IF YOU ARE USING clangd**:
 ```
 {
 "languageserver": {
@@ -25,7 +24,7 @@ Add this config **IF YOU ARE USING clangd** :
   }
 }
 ```
-Add this config **IF YOU ARE USING ccls** :  
+Add this configuration to json file **IF YOU ARE USING ccls**:  
 ```
 {
  "languageserver": {
@@ -42,16 +41,36 @@ Add this config **IF YOU ARE USING ccls** :
   }
 }
 ```
-For more information, read these links : [Installation](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim), [Language servers](https://github.com/neoclide/coc.nvim/wiki/Language-servers), [Configuration files](https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file).
+For more information, read these links: [Install-coc](https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim), [Language-servers](https://github.com/neoclide/coc.nvim/wiki/Language-servers), [Using-the-configuration-file](https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file).
+
+### Python
+Install `python-language-server` via pip:
+```
+$ pip install python-language-server 
+```
+And run this command in your vim:
+```
+:CocInstall coc-python 
+```
+
+### Rust 
+```
+:CocInstall coc-rls
+```
+
+### Bash scripting
+```
+:CocInstall coc-sh
+```
 
 # Plugins
-- [coc](https://github.com/neoclide/coc.nvim) : Intellisense engine (full language server protocol support)
-- [vimspector](https://github.com/puremourning/vimspector) : Debugger 
-- [NERDTree](https://github.com/scrooloose/nerdtree) : File system explorer
-- [VimShell](https://github.com/Shougo/vimshell.vim) : Accessing shell in vim
-- [airline](https://github.com/vim-airline/vim-airline) : Status line 
+- [coc](https://github.com/neoclide/coc.nvim): Intellisense engine (full language server protocol support)
+- [vimspector](https://github.com/puremourning/vimspector): Debugger 
+- [NERDTree](https://github.com/scrooloose/nerdtree): File system explorer
+- [VimShell](https://github.com/Shougo/vimshell.vim): Accessing shell in vim
+- [airline](https://github.com/vim-airline/vim-airline): Status line 
 - [vim-one](https://github.com/rakr/vim-one.git), [onedark](https://github.com/joshdick/onedark.vim), [srcery-vim](https://github.com/srcery-colors/srcery-vim) : Color scheme
-- [asyncrun](https://github.com/skywind3000/asyncrun.vim.git) : Async
-- [auto-pair](https://github.com/jiangmiao/auto-pairs) : Insert or delete brackets, parens, quotes in pair
-
-
+- [asyncrun](https://github.com/skywind3000/asyncrun.vim.git): Run Async Shell Commands and Output to the Quickfix Window
+- [auto-pair](https://github.com/jiangmiao/auto-pairs): Insert or delete brackets, parens, quotes in pair
+- [a.vim](https://github.com/vim-scripts/a.vim): Alternate Files quickly (.c --> .h etc) 
+- [vim-devicons](https://github.com/ryanoasis/vim-devicons): Adds file type icons to Vim plugins such as: NERDTree, vim-airline and so on
