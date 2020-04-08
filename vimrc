@@ -141,5 +141,10 @@ au BufRead,BufNewFile *.qss set filetype=css
 
 :autocmd FileType python :noremap <F5> :AsyncRun -raw python % <CR> 
 :autocmd FileType sh  :noremap <F5> :AsyncRun bash % <CR> 
+:autocmd FileType c  :noremap <F5> :AsyncRun gcc "%" -o "%<" % <CR>  
 :autocmd FileType json syntax match Comment +\/\/.\+$+
 :let g:vimspector_enable_mappings = 'HUMAN' " vimspector mappings 
+
+"use <Tab> and <S-Tab> to navigate the completion list
+:inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+:inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
