@@ -1,10 +1,10 @@
 :set number " Display line numbers on the left side
 :set ls=2 " This makes Vim show a status line even when only one window is shown
 :filetype plugin on " This line enables loading the plugin files for specific file types
-:set tabstop=4 " Set tabstop to tell vim how many columns a tab counts for. Linux kernel code expects each tab to be eight columns wide.
+:set tabstop=8 " Set tabstop to tell vim how many columns a tab counts for. Linux kernel code expects each tab to be eight columns wide.
 :set expandtab " When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
-:set softtabstop=4 " Set softtabstop to control how many columns vim uses when you hit Tab in insert mode. If softtabstop is less than tabstop and expandtab is not set, vim will use a combination of tabs and spaces to make up the desired spacing. If softtabstop equals tabstop and expandtab is not set, vim will always use tabs. When expandtab is set, vim will always use the appropriate number of spaces.
-:set shiftwidth=4 " Set shiftwidth to control how many columns text is indented with the reindent operations (<< and >>) and automatic C-style indentation. 
+:set softtabstop=8 " Set softtabstop to control how many columns vim uses when you hit Tab in insert mode. If softtabstop is less than tabstop and expandtab is not set, vim will use a combination of tabs and spaces to make up the desired spacing. If softtabstop equals tabstop and expandtab is not set, vim will always use tabs. When expandtab is set, vim will always use the appropriate number of spaces.
+:set shiftwidth=8 " Set shiftwidth to control how many columns text is indented with the reindent operations (<< and >>) and automatic C-style indentation. 
 :set nowrap " Don't Wrap lines!
 :set nocp " This changes the values of a LOT of options, enabling features which are not Vi compatible but really really nice
 :set clipboard=unnamedplus
@@ -45,8 +45,7 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
   endif
 " Just show the filename (no path) in the tab
-let g:airline#extensions#tabline#fnamemod = ':t'
-
+:let g:airline#extensions#tabline#fnamemod = ':t'
 
 
  " unicode symbols
@@ -62,11 +61,11 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " NERDTree plugin setting
 
 "open a NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+:autocmd StdinReadPre * let s:std_in=1
+:autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+:autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Open file in new tab with ctrl + t
 :let NERDTreeMapOpenInTab= '<c-t>'
@@ -79,22 +78,41 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 
+" Colorschemes + icons
 Plug 'https://github.com/rakr/vim-one.git'
-Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'https://github.com/Shougo/vimshell.vim.git'
-Plug 'srcery-colors/srcery-vim'
 Plug 'joshdick/onedark.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'srcery-colors/srcery-vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'https://github.com/skywind3000/asyncrun.vim.git'
-Plug 'jiangmiao/auto-pairs'
-Plug 'justmao945/vim-clang'
-Plug 'ayu-theme/ayu-vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'puremourning/vimspector'
-Plug 'vim-scripts/a.vim'
 Plug 'ryanoasis/vim-devicons'
+
+" Shell + interactive command execution 
+Plug 'https://github.com/Shougo/vimshell.vim.git'
+Plug 'https://github.com/skywind3000/asyncrun.vim.git'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+" Filesystem explorer
+Plug 'https://github.com/scrooloose/nerdtree.git'
+Plug 'junegunn/fzf.vim'
+
+" Development stuffs
+Plug 'vim-scripts/a.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'puremourning/vimspector'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'justmao945/vim-clang'
+Plug 'godlygeek/tabular'
+
+" Markdown preview
+Plug 'JamshedVesuna/vim-markdown-preview'
+                        
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'jez/vim-superman'
+
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -138,7 +156,7 @@ au BufRead,BufNewFile *.qss set filetype=css
 :autocmd FileType python :map <F10> :AsyncRun pylint ./%<CR><CR>
 :map <F12> :bw!<CR> 
 
-
+" Run/Compile stuffs
 :autocmd FileType python :noremap <F5> :AsyncRun -raw python % <CR> 
 :autocmd FileType sh  :noremap <F5> :AsyncRun bash % <CR> 
 :autocmd FileType c  :noremap <F5> :AsyncRun gcc "%" -o "%<" % <CR>  
@@ -148,3 +166,9 @@ au BufRead,BufNewFile *.qss set filetype=css
 "use <Tab> and <S-Tab> to navigate the completion list
 :inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 :inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Mimic Emacs Line Editing in Insert Mode Only
+:inoremap <C-A> <Home>
+:inoremap <C-E> <End>
+:inoremap <C-U> <Esc>d0xi
+let vim_markdown_preview_browser='Google Chrome'
