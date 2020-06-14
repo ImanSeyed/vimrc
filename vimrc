@@ -111,7 +111,9 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-Plug 'jez/vim-superman'
+" Extra
+Plug 'jez/vim-superman' " Manual pages
+Plug 'soywod/iris.vim' " Mail client
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -146,7 +148,8 @@ endif
 :let g:srcery_inverse_matches = 1
 :let g:srcery_inverse_match_paren = 1
 :let g:srcery_dim_lisp_paren = 1
-:color srcery
+" :color srcery
+:color archery
 
 
 " show qss file highlighting like css files 
@@ -172,3 +175,10 @@ au BufRead,BufNewFile *.qss set filetype=css
 :inoremap <C-E> <End>
 :inoremap <C-U> <Esc>d0xi
 let vim_markdown_preview_browser='Google Chrome'
+
+" Mail client configureation
+function! SomeCheck()
+   if filereadable("mail.vim")
+       source mail.vim
+   endif
+endfunction
