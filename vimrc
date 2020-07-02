@@ -86,6 +86,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tyrannicaltoucan/vim-deep-space'
 
 " Shell + interactive command execution 
 Plug 'https://github.com/Shougo/vimshell.vim.git'
@@ -149,7 +150,10 @@ endif
 :let g:srcery_inverse_match_paren = 1
 :let g:srcery_dim_lisp_paren = 1
 " :color srcery
-:color archery
+:set background=dark
+:color deep-space
+:let g:airline_theme='deep_space'
+let g:deepspace_italics=1
 
 
 " show qss file highlighting like css files 
